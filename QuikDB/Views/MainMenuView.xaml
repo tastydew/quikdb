@@ -1,0 +1,101 @@
+﻿<Window x:Class="QuikDB.Views.MainMenuView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:QuikDB.Views"
+        xmlns:viewmodels="clr-namespace:QuikDB.ViewModels"
+        xmlns:res="clr-namespace:QuikDB.Properties"
+        mc:Ignorable="d"
+        Title="QuikDB" Height="500" Width="800" WindowStyle="None" ResizeMode="NoResize" BorderBrush="Black" BorderThickness="2" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <viewmodels:MainWindowViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
+            <local:HomeView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:RecoveryOperationsViewModel}">
+            <local:RecoveryOperationsView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:SpecialProceduresViewModel}">
+            <local:SpecialProceduresView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:ToolsViewModel}">
+            <local:ToolsView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:SystemInformationViewModel}">
+            <local:SystemInformationView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:DatabaseRestoreViewModel}">
+            <local:DatabaseRestoreView/>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <DockPanel MinWidth="212">
+                    <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
+                                    DockPanel.Dock="Top"
+                                    HorizontalAlignment="Right" Margin="16"
+                                    IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"/>
+                    <ListBox x:Name="MenuItemsListBox" 
+                             Margin="0 16 0 16"                         
+                             PreviewMouseLeftButtonUp="MenuItemsListBox_PreviewMouseLeftButtonUp" IsEnabled="{Binding IsMainDrawerEnabled}" >
+                        <ListBoxItem x:Name="LI_Home" >
+                            <Button FontSize="15" Margin="10" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="Home" Width="250" Command="{Binding ChangeCurrentViewModel}" CommandParameter="HomeView" />
+                        </ListBoxItem>
+                        <ListBoxItem x:Name="LI_RecoveryOperations" >
+                            <Button FontSize="15" Margin="10" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="Recovery Operations" Width="250" Command="{Binding ChangeCurrentViewModel}" CommandParameter="RecoveryOpsView"/>
+                        </ListBoxItem>
+                        <ListBoxItem x:Name="LI_SpecialProcedures" >
+                            <Button FontSize="15" Margin="10" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="Special Procedures" Width="250" Command="{Binding ChangeCurrentViewModel}" CommandParameter="SpecialProceduresView"/>
+                        </ListBoxItem>
+                        <ListBoxItem x:Name="LI_Tools" >
+                            <Button FontSize="15" Margin="10" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="Tools" Width="250" Command="{Binding ChangeCurrentViewModel}" CommandParameter="ToolsView"/>
+                        </ListBoxItem>
+                        <ListBoxItem x:Name="LI_SystemInformation" >
+                            <Button FontSize="15" Margin="10" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="System Information" Width="250" Command="{Binding ChangeCurrentViewModel}" CommandParameter="SystemInfoView"/>
+                        </ListBoxItem>
+                    </ListBox>
+                </DockPanel>
+            </materialDesign:DrawerHost.LeftDrawerContent>
+            <DockPanel>
+                <materialDesign:ColorZone Padding="16" 
+                                          materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                                          Mode="PrimaryDark" 
+                                          DockPanel.Dock="Top" 
+                                          Height="59" 
+                                          Background="{x:Null}" 
+                                          BorderBrush="Black" 
+                                          BorderThickness="0,0,0,1">
+                    <DockPanel>
+                        <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
+                                      IsChecked="False"
+                                      x:Name="MenuToggleButton" 
+                                      Height="25" 
+                                      Width="25" 
+                                      Foreground="Black"/>
+
+                        <Button x:Name="btnLogin_Exit" 
+                                Grid.Row="0" 
+                                HorizontalAlignment="Right" 
+                                Background="#FFDC0000"
+                                ToolTip="{x:Static res:Resources.LOGIN_EXIT_TOOLTIP}" 
+                                BorderBrush="{x:Null}" 
+                                Width="50" 
+                                materialDesign:ShadowAssist.ShadowDepth="Depth2" 
+                                Click="btnLogin_Exit_Click" 
+                                Height="Auto">
+                            <materialDesign:PackIcon Kind="CloseBox" />
+                        </Button>
+                    </DockPanel>
+                </materialDesign:ColorZone>
+                <ContentControl x:Name="MainWindowContentControl" Content="{Binding Path=CurrentViewModel}"/>
+                <!--<materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="MainSnackbar" Grid.Row="1" />-->
+            </DockPanel>
+        </materialDesign:DrawerHost>
+
+    </Grid>
+</Window>

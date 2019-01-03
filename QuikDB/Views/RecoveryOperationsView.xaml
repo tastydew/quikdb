@@ -1,0 +1,126 @@
+﻿<UserControl x:Class="QuikDB.Views.RecoveryOperationsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:QuikDB.Views"
+             xmlns:viewmodels="clr-namespace:QuikDB.ViewModels"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:res="clr-namespace:QuikDB.Properties"
+             mc:Ignorable="d"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             Background="{x:Null}"
+             TextElement.FontWeight="Medium"
+             TextElement.FontSize="14"
+             FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+             d:DesignHeight="430" d:DesignWidth="790">
+    <UserControl.Resources>
+
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--Restore Database Card-->
+        <materialDesign:Card Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Margin="5,0,5,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Button Style="{StaticResource MaterialDesignFlatButton}" Grid.Row="0" Grid.Column="0" Width="100" Height="90">
+                    <materialDesign:PackIcon Kind="DatabaseImport"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="75" Height="75" Foreground="#FF8F8F8F"/>
+                </Button>
+                <Separator Grid.Row="1" Style="{StaticResource MaterialDesignDarkSeparator}" Height="Auto" />
+                <Button Grid.Row="2" Content="Restore Database" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding DataContext.ChangeCurrentViewModel, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" CommandParameter="DatabaseRestoreView" >
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <Viewbox>
+                                <TextBlock Text="{x:Static res:Resources.RECOVERY_RESTORE_DATABASE}"/>
+                            </Viewbox>
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+            </Grid>
+        </materialDesign:Card>
+        <!--Backup Database Card-->
+        <materialDesign:Card Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Margin="5,0,5,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Button Style="{StaticResource MaterialDesignFlatButton}" Grid.Row="0" Grid.Column="0" Width="100" Height="90">
+                    <materialDesign:PackIcon Kind="DatabaseExport" VerticalAlignment="Center" HorizontalAlignment="Center" Width="75" Height="75" Foreground="#FF8F8F8F"/>
+                </Button>
+                <Separator Grid.Row="1" Style="{StaticResource MaterialDesignDarkSeparator}" Height="Auto" />
+                <Button Grid.Row="2" Content="Backup Database" Style="{StaticResource MaterialDesignFlatButton}">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <Viewbox>
+                                <TextBlock Text="{x:Static res:Resources.RECOVERY_BACKUP_DATABASE}"/>
+                            </Viewbox>
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+            </Grid>
+        </materialDesign:Card>
+        <!--New Database Creation Card-->
+        <materialDesign:Card Grid.Column="3" Grid.Row="0" VerticalAlignment="Center" Margin="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Button Style="{StaticResource MaterialDesignFlatButton}" Grid.Row="0" Grid.Column="0" Width="100" Height="90">
+                    <materialDesign:PackIcon Kind="DatabasePlus" VerticalAlignment="Center" HorizontalAlignment="Center" Width="75" Height="75" Foreground="#FF8F8F8F"/>
+                </Button>
+                <Separator Grid.Row="1" Style="{StaticResource MaterialDesignDarkSeparator}" Height="Auto" />
+                <Button Grid.Row="2" Content="New Database" Style="{StaticResource MaterialDesignFlatButton}">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <Viewbox>
+                                <TextBlock Text="{x:Static res:Resources.RECOVERY_NEW_DATABASE}"/>
+                            </Viewbox>
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+            </Grid>
+        </materialDesign:Card>
+        <!--Database Consistency Card-->
+        <materialDesign:Card Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Margin="5,0,5,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Button Style="{StaticResource MaterialDesignFlatButton}" Grid.Row="0" Grid.Column="0" Width="100" Height="90">
+                    <materialDesign:PackIcon Kind="DatabaseCheck" VerticalAlignment="Center" HorizontalAlignment="Center" Width="75" Height="75" Foreground="#FF8F8F8F"/>
+                </Button>
+                <Separator Grid.Row="1" Style="{StaticResource MaterialDesignDarkSeparator}" Height="Auto" />
+                <Button Grid.Row="2" Style="{StaticResource MaterialDesignFlatButton}">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <Viewbox>
+                                <TextBlock Text="{x:Static res:Resources.RECOVERY_CONSISTENCY_CHECK}"/>
+                            </Viewbox>
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+            </Grid>
+        </materialDesign:Card>
+        <!--MSDB Repair Card-->
+        <!--Recreate LDF Card-->
+    </Grid>
+</UserControl>

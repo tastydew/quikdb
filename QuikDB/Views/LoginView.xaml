@@ -1,0 +1,86 @@
+﻿<Window x:Class="QuikDB.Views.LoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:QuikDB.Views"
+        xmlns:res="clr-namespace:QuikDB.Properties"
+        mc:Ignorable="d"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{x:Null}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+        Title="Login" Height="350" Width="600" ResizeMode="NoResize"  WindowStyle="None" WindowStartupLocation="CenterScreen" ShowInTaskbar="True">
+    <Border Grid.RowSpan="4" BorderBrush="Black" BorderThickness="2" CornerRadius="4" Background="White">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <md:PopupBox x:Name="btnChange_Language"  Grid.Row="0" HorizontalAlignment="Left"
+                      BorderBrush="{x:Null}" Width="35" >
+                <StackPanel Orientation="Vertical">
+                    <Menu IsMainMenu="True">
+                        <MenuItem Header="Language">
+                            <MenuItem.Icon>
+                                <md:PackIcon Kind="Language" />
+                            </MenuItem.Icon>
+                            <MenuItem Header="English"/>
+                            <MenuItem Header="Español"/>
+                            <MenuItem Header="Français"/>
+                        </MenuItem>
+                    </Menu>
+                </StackPanel>
+            </md:PopupBox>
+
+            <Button x:Name="btnLogin_Exit" Grid.Row="0" HorizontalAlignment="Right" Margin="0,5,5,0"
+                      Background="#FFDC0000"
+                      ToolTip="{x:Static res:Resources.LOGIN_EXIT_TOOLTIP}" BorderBrush="{x:Null}" Width="49" Click="btnLogin_Exit_Click">
+                <md:PackIcon
+                    Kind="CloseBox" Height="20" Width="20" />
+            </Button>
+            <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" Text="QuikDB"/>
+            <Label Content="{x:Static res:Resources.LOGIN_SUBHEADER_LABEL}" Grid.Row="2" FontSize="18" HorizontalAlignment="Center"/>
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+
+                </Grid.RowDefinitions>
+
+                <!--TODO Use Resource Strings for Labels-->
+
+                <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top">
+                    <md:PackIcon Kind="Account" VerticalAlignment="Bottom" Width="27" Height="27"/>
+                    <TextBox md:HintAssist.Hint="{x:Static res:Resources.LOGIN_USERNAME_LABEL}" Width="170" Text="{Binding LoginUserName}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
+                    <md:PackIcon Kind="Lock" VerticalAlignment="Bottom" Width="27" Height="27"/>
+                    <PasswordBox md:HintAssist.Hint="{x:Static res:Resources.LOGIN_PASSWORD_LABEL}" Width="170"
+                        Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
+                </StackPanel>
+                <Button Name="btnLogin" 
+                    Grid.Column="1" 
+                    Grid.Row="3"
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    Width="150"
+                    Content="{x:Static res:Resources.LOGIN_MAINLOGINBUTTON_LABEL}"
+                    VerticalAlignment="Bottom" Click="btnLogin_Click">
+                </Button>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
